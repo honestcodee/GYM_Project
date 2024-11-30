@@ -53,6 +53,37 @@ void viewfeedback(string feedback[][4]);
 int strtoint(string n);
 bool loadrequests(string reqname[][2],int reqfee[]);
 bool saverequests(string reqname[][2], int reqfee[]);
+void getPassword(string &password)
+{
+    char ch;
+    while (true)
+    {
+        ch = _getch(); // get a character without echoing it to the console
+
+        if (ch == 13)
+        { // Enter key is pressed
+            break;
+        }
+        else if (ch == 8)
+        { // Backspace key is pressed
+            if (password.length() > 0)
+            {
+                password = password.substr(0, password.length() - 1);
+                cout << "\b \b"; // erase last character
+            }
+        }
+        else
+        {
+            password += ch;
+            cout << "*"; // display an asterisk for each character
+        }
+    }
+    cout << endl; // Move to the next line after password input
+}
+void setColor(int color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
 //--------------------------------------------------------------------------------------------------------------
 
 int main()
@@ -84,8 +115,8 @@ int main()
     int logintrainer = 0, loginmember = 0;
     int mcount = 0, tcount = 0, reqcount = 0, techcount = 0;
     string user, pwd;
-    string trainuser = "nv", trainpwd = "nv";
-    string memuser = "nv", mempwd = "nv";
+    string trainuser = "", trainpwd = "";
+    string memuser = "", mempwd = "";
     bool memberSearchFlag = false;
     bool trainerSearchFlag = false;
     int loggedInUserType = -10;
@@ -109,12 +140,14 @@ int main()
         {
 
         case 1:
+            system("cls");
+            gymName();
             enter();
             cout << "Enter the username for Admin: ";
             cin >> user;
 
             cout << "Enter Password for Admin: ";
-            cin >> pwd;
+            getPassword(pwd);
 
             if (user == "1" && pwd == "1")
                 loggedInUserType = 1;
@@ -122,12 +155,14 @@ int main()
                 loggedInUserType = -1;
             break;
         case 2:
+            system("cls");
+            gymName();
             enter();
             cout << "Enter the username for trainer: ";
             cin >> trainuser;
 
             cout << "Enter Password for trainer: ";
-            cin >> trainpwd;
+            getPassword(trainpwd);
             for (int i = 0; i < MAXTRAINER; i++)
             {
                 if (trainuser == trainerUsername[i] && trainpwd == trainerPassword[i])
@@ -148,6 +183,8 @@ int main()
             }
             break;
         case 3:
+            system("cls");
+            gymName();
             enter();
             cout << "Enter the username for Member: ";
             cin >> memuser;
@@ -187,6 +224,8 @@ int main()
         }
         if (loggedInUserType == 1) // admin
         {
+            system("cls");
+            gymName();
             do
             {
                 admin();
@@ -203,32 +242,50 @@ int main()
                 switch (input)
                 {
                 case 1:
+                    system("cls");
+                    gymName();
                     addmember(memberUsername, memberPassword, membersfee, feestatus, trainerUsername, membertrain, mcount);
 
                     break;
                 case 2:
+                    system("cls");
+                    gymName();
                     update(memberUsername, memberPassword, membersfee, membertrain, trainerUsername, feestatus);
                     break;
                 case 3:
+                    system("cls");
+                    gymName();
                     deletee(memberUsername, memberPassword, membersfee, feestatus, membertrain, mcount);
                     break;
                 case 4:
+                    system("cls");
+                    gymName();
                     memberlist(memberUsername, memberPassword, membersfee, feestatus, mcount);
                     break;
                 case 5:
+                    system("cls");
+                    gymName();
                     listtrainer(trainerUsername, trainerPassword, trainertime, trainerdues, tcount);
                     break;
                 case 6:
+                    system("cls");
+                    gymName();
                     editrainer(trainerUsername, trainerPassword, trainertime, trainerdues, paiddues, tcount);
                     break;
                 case 7:
+                    system("cls");
+                    gymName();
                     analytics(mcount, feestatus, membersfee, trainerdues, tcount);
                     break;
                 case 8:
+                    system("cls");
+                    gymName();
                     requests(memberUsername, memberPassword, membersfee, reqname, reqfee, reqcount, mcount, feestatus);
 
                     break;
                 case 9:
+                    system("cls");
+                    gymName();
                     viewfeedback(feedback);
                     break;
                 case 0:
@@ -244,10 +301,11 @@ int main()
         }
         else if (loggedInUserType == 2) // trainer
         {
-
+            system("cls");
+            gymName();
+            trainer();
             do
             {
-                trainer();
                 trainerDisplay();
                 cout << "\tChoose an option: ";
                 cin >> input;
@@ -261,13 +319,18 @@ int main()
                 switch (input)
                 {
                 case 1:
-
+                    system("cls");
+                    gymName();
                     shedules(trainerUsername, trainerPassword, trainerdues, trainertime, tcount);
                     break;
                 case 2:
+                    system("cls");
+                    gymName();
                     traintech(techname, description, techcount);
                     break;
                 case 3:
+                    system("cls");
+                    gymName();
                     trainerrdue(trainerdues, paiddues, logintrainer);
                     break;
                 case 0:
@@ -284,6 +347,8 @@ int main()
         }
         else if (loggedInUserType == 3) // userlogin
         {
+            system("cls");
+            gymName();
             member();
             do
             {
@@ -302,15 +367,23 @@ int main()
                 {
 
                 case 1:
+                    system("cls");
+                    gymName();
                     memberrdue(membersfee, feestatus, loginmember);
                     break;
                 case 2:
+                    system("cls");
+                    gymName();
                     changetrainer(membertrain, trainerUsername, loginmember);
                     break;
                 case 3:
+                    system("cls");
+                    gymName();
                     availabletrain(trainerUsername, trainertime, tcount);
                     break;
                 case 4:
+                    system("cls");
+                    gymName();
                     feedbackk(feedback);
                     break;
                 case 0:
@@ -327,6 +400,8 @@ int main()
         }
         else if (loggedInUserType == 4) // signup
         {
+            system("cls");
+            gymName();
             member();
             membersignup();
 
@@ -346,19 +421,24 @@ int main()
                 {
 
                 case 1:
+                    system("cls");
+                    gymName();
                     packages();
                     break;
                 case 2:
+                    system("cls");
+                    gymName();
                     availabletrain(trainerUsername, trainertime, tcount);
-
                     break;
                 case 3:
+                    system("cls");
+                    gymName();
                     enroll(reqname, reqfee, reqcount, mcount);
                     break;
                 case 0:
+
                     cout << "You are logged out" << endl;
                     break;
-
                 default:
                     cout << "Invalid choice!!!";
                     break;
@@ -388,7 +468,7 @@ int main()
 }
 void gymName()
 {
-    system("color 0C");
+    setColor(4);
 
     cout << " __  __     __         ______   ______     ______        ______     __  __     __    __    " << endl
          << "/\\ \\ /\\ \\   /\\ \\       /\\__  _\\ /\\  == \\   /\\  __ \\      /\\  ___\\   /\\ \\_\\ \\   /\\ \\-./  \\   " << endl
@@ -399,7 +479,7 @@ void gymName()
 }
 void menu()
 {
-    // system("color 07");
+    setColor(7);
     cout << endl
          << "              ------------------------------------------------------------------" << endl
          << left
@@ -410,7 +490,7 @@ void menu()
 }
 void AdminDisplay()
 {
-    system("color 07");
+    setColor(7);
     cout << endl
          << "              ------------------------------------------------------------------" << endl
          << left
@@ -423,7 +503,7 @@ void AdminDisplay()
 }
 void trainerDisplay()
 {
-    system("color 07");
+    setColor(7);
     cout << endl
          << "              ------------------------------------------------------------------" << endl
          << left
@@ -433,7 +513,7 @@ void trainerDisplay()
 }
 void logindispaly()
 {
-    system("color 07");
+    setColor(7);
     cout << endl
          << "              ------------------------------------------------------------------" << endl
          << left
@@ -444,7 +524,7 @@ void logindispaly()
 }
 void signupdispaly()
 {
-    system("color 07");
+    setColor(7);
     cout << endl
          << "              ------------------------------------------------------------------" << endl
          << left
@@ -454,43 +534,43 @@ void signupdispaly()
 }
 void enter()
 {
-    system("color 07");
-    system("cls");
+    setColor(7);
+    // system("cls");
     cout << "---------------------------------------------------------------------------------------------------" << endl;
     cout << "|                                  Enter Credentials   (^_^)                                      | " << endl;
     cout << "---------------------------------------------------------------------------------------------------" << endl;
 }
 void admin()
 {
-    system("cls");
+    // system("cls");
     cout << "           ---------------------------------------------------------------------------------" << endl;
     cout << "           |                                   Admin (login)                               | " << endl;
     cout << "           ---------------------------------------------------------------------------------" << endl;
 }
 void trainer()
 {
-    system("cls");
+    // system("cls");
     cout << "           ---------------------------------------------------------------------------------" << endl;
     cout << "           |                                   Trainer (login)                             |  " << endl;
     cout << "           ---------------------------------------------------------------------------------" << endl;
 }
 void member()
 {
-    system("cls");
+    // system("cls");
     cout << "           ---------------------------------------------------------------------------------" << endl;
     cout << "           |                                   Welcome to Member                           | " << endl;
     cout << "           ---------------------------------------------------------------------------------" << endl;
 }
 void memberlogin()
 {
-    system("cls");
+    // system("cls");
     cout << "           ---------------------------------------------------------------------------------" << endl;
     cout << "           |                                    Member (login)                             | " << endl;
     cout << "           ---------------------------------------------------------------------------------" << endl;
 }
 void membersignup()
 {
-    system("cls");
+    // system("cls");
     cout << "           ---------------------------------------------------------------------------------" << endl;
     cout << "           |                                    Member (Signup)                             | " << endl;
     cout << "           ---------------------------------------------------------------------------------" << endl;
@@ -529,6 +609,7 @@ void initialize(string memberUsername[], string memberPassword[], int membersfee
 }
 int feePack(int p)
 {
+    setColor(7);
     string refer;
     if (p == 1)
     {
@@ -566,6 +647,7 @@ int feePack(int p)
 }
 void addmember(string memberUsername[], string memberPassword[], int membersfee[], char feestatus[], string trainerUsername[], string membertrain[], int &mcount)
 {
+    setColor(7);
     cout << "       ---------------------" << endl;
     cout << "            ADD A MEMBER    " << endl;
     cout << "       ---------------------" << endl;
@@ -613,7 +695,7 @@ void addmember(string memberUsername[], string memberPassword[], int membersfee[
             }
             cout << "Enter the pacakage for that member(1-5):";
             cin >> p;
-            while (p > 5 && p < 1 || !cin || cin.eof() || cin.fail())
+            while (p > 5 || p < 1 || !cin || cin.eof() || cin.fail())
             {
                 cout << "Invaild pacakage, please enter again.. ";
                 cin.clear();
@@ -686,6 +768,7 @@ void addmember(string memberUsername[], string memberPassword[], int membersfee[
 }
 void update(string memberUsername[], string memberPassword[], int membersfee[], string membertrain[], string trainerUsername[], char feestatus[])
 {
+    setColor(7);
     string user, uppass, upuser, tname;
     int upfee;
     char upch;
@@ -787,6 +870,7 @@ void update(string memberUsername[], string memberPassword[], int membersfee[], 
 }
 void deletee(string memberUsername[], string memberPassword[], int membersfee[], char feestatus[], string membertrain[], int &mcount)
 {
+    setColor(7);
     string deluser, delpass;
     bool msearch = false;
     cout << "       ---------------------" << endl;
@@ -834,7 +918,8 @@ void deletee(string memberUsername[], string memberPassword[], int membersfee[],
 }
 void memberlist(string memberUsername[], string memberPassword[], int membersfee[], char feestatus[], int mcount)
 {
-    system("cls");
+    setColor(7);
+    // system("cls");
     cout << "    -----------------------------------------------------------------------------------------------------------" << endl;
     cout << "                             LIST OF ALL MEMBERS                              " << endl;
     cout << "    -----------------------------------------------------------------------------------------------------------" << endl;
@@ -862,6 +947,7 @@ bool timecheck(string tm)
 }
 void editrainer(string trainerUsername[], string trainerPassword[], string trainertime[], int trainerdues[], int paiddues[], int &tcount)
 {
+    setColor(7);
     int n;
     cout << "       ---------------------" << endl;
     cout << "            EDIT A TRAINER    " << endl;
@@ -1074,6 +1160,7 @@ void editrainer(string trainerUsername[], string trainerPassword[], string train
 }
 void listtrainer(string trainerUsername[], string trainerPassword[], string trainertime[], int trainerdues[], int tcount)
 {
+    setColor(7);
     cout << "    ---------------------------------------------------------------------------------------------------------" << endl;
     cout << "                                     LIST OF ALL TRAINERS                                     " << endl;
     cout << "    ---------------------------------------------------------------------------------------------------------" << endl;
@@ -1103,14 +1190,15 @@ void listtrainer(string trainerUsername[], string trainerPassword[], string trai
 }
 void trainerfees()
 {
-    system("cls");
+    // system("cls");
     cout << "------------------------------------------------------------------------------------" << endl;
     cout << "                                    Dues Info                                       " << endl;
     cout << "------------------------------------------------------------------------------------" << endl;
 }
 void analytics(int mcount, char feestatus[], int membersfee[], int trainerdues[], int tcount)
 {
-    system("cls");
+    setColor(7);
+    // system("cls");
     int sum = 0, tsum = 0, trainsum = 0;
     cout << "---------------------------------------------------------------------------------------------" << endl;
     cout << "                                View Analytics                                               " << endl;
@@ -1161,10 +1249,11 @@ void analytics(int mcount, char feestatus[], int membersfee[], int trainerdues[]
     cout << endl
          << "                  Press any key to continue..";
     getch();
-    system("color 07");
+    setColor(7);
 }
 void packages()
 {
+    system("color 01");
     cout << "---------------------------------------------------------" << endl;
     cout << "|                 1) Basic Package                      |" << endl;
     cout << "|Access: Limited to off-peak hours (e.g., 9 AM - 3 PM). |" << endl;
@@ -1227,10 +1316,11 @@ int validatereg(string n)
 }
 int discount(int f, int mcount)
 {
+    setColor(7);
     int n, dis = 0;
     char ch, ch1;
     string name, reg, refer;
-    system("cls");
+    // system("cls");
     Sleep(1000);
     cout << "----------------------------------------------------------------" << endl;
     cout << "                    Discount  Offers                            " << endl;
@@ -1388,7 +1478,8 @@ int mailvalidate(string m)
 }
 void enroll(string reqname[][2], int reqfee[], int &reqcount, int mcount)
 {
-    system("cls");
+    setColor(7);
+    // system("cls");
     string name, mail;
     int pack, fee;
     char ch, ch1, ch2;
@@ -1427,7 +1518,7 @@ void enroll(string reqname[][2], int reqfee[], int &reqcount, int mcount)
     cout << endl
          << "Please select your package: ";
     cin >> pack;
-    while (pack > 5 && pack < 1 || !cin || cin.eof() || cin.fail())
+    while (pack > 5 || pack < 1 || !cin || cin.eof() || cin.fail())
     {
         cout << "Invaild pacakage, please enter again.. ";
         cin.clear();
@@ -1497,9 +1588,10 @@ void enroll(string reqname[][2], int reqfee[], int &reqcount, int mcount)
     getch();
 }
 void requests(string memberUsername[], string memberPassword[], int membersfee[], string reqname[][2], int reqfee[], int reqcount, int &mcount, char feestatus[]) {
+    setColor(7);
     int n;
     char ch;
-    system("cls");
+    // system("cls");
     cout << "---------------------------------------------------------------------------------------" << endl;
     cout << "                                      View Pending Requests                            " << endl;
     cout << "---------------------------------------------------------------------------------------" << endl;
@@ -1537,7 +1629,9 @@ void requests(string memberUsername[], string memberPassword[], int membersfee[]
             feestatus[i] = ch;
             mcount++;
             cout << "Member added successfully!" << endl;
-
+            cout << endl
+                 << "                  Press any key to continue..";
+            getch();
             reqname[n - 1][0] = "nv";
             reqname[n - 1][1] = "nv";
             reqfee[n - 1] = 0;
@@ -1552,6 +1646,7 @@ void requests(string memberUsername[], string memberPassword[], int membersfee[]
 }
 void availabletrain(string trainerUsername[], string trainertime[], int tcount)
 {
+    setColor(7);
     cout << "----------------------------------------------------------------------------------------------" << endl;
     cout << "                               Available Trainers                                            " << endl;
     cout << "----------------------------------------------------------------------------------------------" << endl;
@@ -1570,6 +1665,7 @@ void availabletrain(string trainerUsername[], string trainertime[], int tcount)
 }
 void traintech(string techname[], string description[], int &techcount)
 {
+    setColor(7);
     int n;
     cout << "----------------------------------------------------------------" << endl;
     cout << "                      Fitness Techniques                        " << endl;
@@ -1681,6 +1777,7 @@ void traintech(string techname[], string description[], int &techcount)
 }
 void shedules(string trainerUsername[], string trainerPassword[], int trainerdues[], string trainertime[], int tcount)
 {
+    setColor(7);
     cout << "----------------------------------------------------------------------------------------------" << endl;
     cout << "                               Your shedules                                              " << endl;
     cout << "----------------------------------------------------------------------------------------------" << endl;
@@ -1699,6 +1796,7 @@ void shedules(string trainerUsername[], string trainerPassword[], int trainerdue
 }
 void trainerrdue(int trainerdues[], int paiddues[], int logintrainer)
 {
+    setColor(7);
     cout << "-------------------------------------" << endl;
     cout << "Your dues for this month is " << trainerdues[logintrainer] << endl;
     cout << "-------------------------------------" << endl;
@@ -1712,6 +1810,7 @@ void trainerrdue(int trainerdues[], int paiddues[], int logintrainer)
 }
 void memberrdue(int membersfee[], char feestatus[], int loginmember)
 {
+    setColor(7);
     cout << "-------------------------------------" << endl;
     cout << "Your fee for this month is " << membersfee[loginmember] << endl;
     cout << "-------------------------------------" << endl;
@@ -1733,6 +1832,7 @@ void memberrdue(int membersfee[], char feestatus[], int loginmember)
 }
 void changetrainer(string membertrain[], string trainerUsername[], int loginmember)
 {
+    setColor(7);
     cout << "------------------------------------------------" << endl;
     cout << "Your current trainer is: " << membertrain[loginmember] << endl;
     cout << "------------------------------------------------" << endl;
@@ -1758,9 +1858,6 @@ void changetrainer(string membertrain[], string trainerUsername[], int loginmemb
             cin.ignore();
             while (!found)
             {
-                cout << "Enter your trainer name: ";
-                cin.ignore(100, '\n');
-                getline(cin, name);
                 for (int i = 0; i < MAXTRAINER; i++)
                 {
                     if (name == trainerUsername[i])
@@ -1889,7 +1986,8 @@ void intifeedback(string feedback[][4])
 }
 void feedbackk(string feedback[][4])
 {
-    system("cls");
+    setColor(7);
+    // system("cls");
     cout << "---------------------------------------------------------" << endl;
     cout << "             WELCOME TO THE FEEDBACK MENU                " << endl;
     cout << "---------------------------------------------------------" << endl;
@@ -1950,6 +2048,7 @@ void feedbackk(string feedback[][4])
 }
 void viewfeedback(string feedback[][4])
 {
+    setColor(7);
     cout << "-------------------------------------------------------------------" << endl;
     cout << "                            LIST OF ALL FEEDBACKS                  " << endl;
     cout << "--------------------------------------------------------------------" << endl;
