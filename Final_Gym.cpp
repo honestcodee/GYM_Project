@@ -224,10 +224,10 @@ int main()
         }
         if (loggedInUserType == 1) // admin
         {
-            system("cls");
-            gymName();
             do
             {
+                system("cls");
+                gymName();
                 admin();
                 AdminDisplay();
                 cout << "\tChoose an option: ";
@@ -244,48 +244,57 @@ int main()
                 case 1:
                     system("cls");
                     gymName();
+                    admin();
                     addmember(memberUsername, memberPassword, membersfee, feestatus, trainerUsername, membertrain, mcount);
 
                     break;
                 case 2:
                     system("cls");
                     gymName();
+                    admin();
                     update(memberUsername, memberPassword, membersfee, membertrain, trainerUsername, feestatus);
                     break;
                 case 3:
                     system("cls");
                     gymName();
+                    admin();
                     deletee(memberUsername, memberPassword, membersfee, feestatus, membertrain, mcount);
                     break;
                 case 4:
                     system("cls");
                     gymName();
+                    admin();
                     memberlist(memberUsername, memberPassword, membersfee, feestatus, mcount);
                     break;
                 case 5:
                     system("cls");
                     gymName();
+                    admin();
                     listtrainer(trainerUsername, trainerPassword, trainertime, trainerdues, tcount);
                     break;
                 case 6:
                     system("cls");
                     gymName();
+                    admin();
                     editrainer(trainerUsername, trainerPassword, trainertime, trainerdues, paiddues, tcount);
                     break;
                 case 7:
                     system("cls");
                     gymName();
+                    admin();
                     analytics(mcount, feestatus, membersfee, trainerdues, tcount);
                     break;
                 case 8:
                     system("cls");
                     gymName();
+                    admin();
                     requests(memberUsername, memberPassword, membersfee, reqname, reqfee, reqcount, mcount, feestatus);
 
                     break;
                 case 9:
                     system("cls");
                     gymName();
+                    admin();
                     viewfeedback(feedback);
                     break;
                 case 0:
@@ -301,11 +310,11 @@ int main()
         }
         else if (loggedInUserType == 2) // trainer
         {
-            system("cls");
-            gymName();
-            trainer();
             do
             {
+                 system("cls");
+                 gymName();
+                 trainer();
                 trainerDisplay();
                 cout << "\tChoose an option: ";
                 cin >> input;
@@ -321,16 +330,19 @@ int main()
                 case 1:
                     system("cls");
                     gymName();
+                    trainer();
                     shedules(trainerUsername, trainerPassword, trainerdues, trainertime, tcount);
                     break;
                 case 2:
                     system("cls");
                     gymName();
+                    trainer();
                     traintech(techname, description, techcount);
                     break;
                 case 3:
                     system("cls");
                     gymName();
+                    trainer();
                     trainerrdue(trainerdues, paiddues, logintrainer);
                     break;
                 case 0:
@@ -347,11 +359,11 @@ int main()
         }
         else if (loggedInUserType == 3) // userlogin
         {
-            system("cls");
-            gymName();
-            member();
             do
             {
+                system("cls");
+                gymName();
+                member();
                 memberlogin();
                 logindispaly();
                 cout << "\tChoose an option: ";
@@ -369,21 +381,25 @@ int main()
                 case 1:
                     system("cls");
                     gymName();
+                    memberlogin();
                     memberrdue(membersfee, feestatus, loginmember);
                     break;
                 case 2:
                     system("cls");
                     gymName();
+                    memberlogin();
                     changetrainer(membertrain, trainerUsername, loginmember);
                     break;
                 case 3:
                     system("cls");
                     gymName();
+                    memberlogin();
                     availabletrain(trainerUsername, trainertime, tcount);
                     break;
                 case 4:
                     system("cls");
                     gymName();
+                    memberlogin();
                     feedbackk(feedback);
                     break;
                 case 0:
@@ -400,13 +416,13 @@ int main()
         }
         else if (loggedInUserType == 4) // signup
         {
-            system("cls");
-            gymName();
-            member();
-            membersignup();
 
             do
             {
+                system("cls");
+                gymName();
+                member();
+                membersignup();
                 signupdispaly();
                 cout << "\tChoose an option: ";
                 cin >> input;
@@ -423,16 +439,19 @@ int main()
                 case 1:
                     system("cls");
                     gymName();
+                    membersignup();
                     packages();
                     break;
                 case 2:
                     system("cls");
                     gymName();
+                    membersignup();
                     availabletrain(trainerUsername, trainertime, tcount);
                     break;
                 case 3:
                     system("cls");
                     gymName();
+                    membersignup();
                     enroll(reqname, reqfee, reqcount, mcount);
                     break;
                 case 0:
